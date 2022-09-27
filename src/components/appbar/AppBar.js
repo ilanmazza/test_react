@@ -161,6 +161,7 @@ export default function PrimarySearchAppBar() {
       <AppBar position="static">
         <Toolbar>
           <IconButton
+            href="/"
             size="large"
             edge="start"
             color="inherit"
@@ -170,6 +171,7 @@ export default function PrimarySearchAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography
+            href="/"
             variant="h6"
             noWrap
             component="div"

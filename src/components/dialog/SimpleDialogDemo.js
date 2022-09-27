@@ -2,7 +2,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-import SignIn from '../signIn/SingIn';
+import SignIn from '../signIn/Login';
 
 
 function SimpleDialog(props) {
