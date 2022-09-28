@@ -19,7 +19,7 @@ function HomePage() {
       <Container>
         <Grid>
           {mock.lessons.map(lessons => (
-            <Card name={lessons.name} description={lessons.description} />
+            <Card name={lessons.name} description={lessons.description} costo={lessons.costo} frecuencia={lessons.frecuencia} duracion={lessons.duracion} image={lessons.image}/>
           ))}
         </Grid>
       </Container>
