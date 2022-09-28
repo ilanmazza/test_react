@@ -16,7 +16,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import TextField from '@mui/material/TextField';
 
-
+import Grid from '@mui/material/Unstable_Grid2';
 
 import BasicRating from "../rating/Rating"
 
@@ -31,7 +31,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard({id, name, description, materia, duracion, frecuencia,costo}) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -39,6 +39,7 @@ export default function RecipeReviewCard() {
   };
 
   return (
+    <Grid>
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
         avatar={
@@ -51,8 +52,7 @@ export default function RecipeReviewCard() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Cursos WEB"
-        subheader="September 14, 2022"
+        title={name}
       />
       <CardMedia
         component="img"
@@ -62,7 +62,7 @@ export default function RecipeReviewCard() {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          DESCRIPCION DEL CURSO
+          {description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -83,7 +83,7 @@ export default function RecipeReviewCard() {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>TITULO</Typography>
+          <Typography paragraph>TITULO {}</Typography>
           <Typography paragraph>
             DESCRIPCION DETALLADA DEL CURSO.
           </Typography>
@@ -94,5 +94,6 @@ export default function RecipeReviewCard() {
         </CardContent>
       </Collapse>
     </Card>
+    </Grid>
   );
 }

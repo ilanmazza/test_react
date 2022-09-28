@@ -1,8 +1,31 @@
 {
-    "courses": [
+    "lessons": [
       {
+        "id": 1,
         "name": "API Desarrollo Web",
-        "description": "React"
+        "description": "HTML - CSS - javaScript",
+        "materia": "DevFrontEnd",
+        "duracion": 32,
+        "frecuencia": "On Demand",
+        "costo": 50
+      },
+      {
+        "id": 2,
+        "name": "Kubernetes",
+        "description": "Desarrollo de infraestructura",
+        "materia": "Kubernetes",
+        "duracion": 72,
+        "frecuencia": "3 veces por semana",
+        "costo": 100
+      },
+      {
+        "id": 3,
+        "name": "Intro Python",
+        "description": "Automatizacion de tareas",
+        "materia": "Python",
+        "duracion": 32,
+        "frecuencia": "On Demand",
+        "costo": 40
       }
     ]
   }
