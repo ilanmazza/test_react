@@ -1,9 +1,7 @@
 import * as React from 'react';
 import AppBar from "../components/appbar/AppBar";
 import Card from '../components/card/Card';
-import Grid from '../components/grid/Grid';
-import SimpleDialogDemo from '../components/dialog/SimpleDialogDemo';
-import { Container } from '@mui/system';
+import Grid2 from '@mui/material/Unstable_Grid2';
 import { Typography } from '@mui/material';
 
 import Box from '@mui/material/Box';
@@ -23,13 +21,11 @@ for (const lesson of mock.lessons){
       <AppBar></AppBar>
       <Box sx={{ fontStyle: 'oblique' }}><Typography>Bienvenido de nuevo  {mockuser.name}</Typography></Box>
       <Box sx={{ fontStyle: 'normal' }}><Typography>Estos son tus cursos:</Typography></Box>      
-      <Container>
-        <Grid>
+      <Grid2 container spacing={2} display="flex" justifyContent="center" alignItems="center">
         {available_lessons.map(lessons => (
             <Card name={lessons.name} description={lessons.description} costo={lessons.costo} frecuencia={lessons.frecuencia} duracion={lessons.duracion} image={lessons.image}/>
           ))}
-        </Grid>
-      </Container>
+       </Grid2>
     </div>
   );
 }
