@@ -1,4 +1,11 @@
 {
+    "user": [
+      {
+        "id": 1,
+        "name": "Carlos Macabro",
+        "lessons": [1,2,4]
+      }
+    ],
     "lessons": [
       {
         "id": 1,
@@ -30,6 +37,28 @@
         "frecuencia": "On Demand",
         "costo": 40,
         "image": "https://www.mytaskpanel.com/wp-content/uploads/2021/05/2021-05-14-1.webp"
+
+      },
+      {
+        "id": 4,
+        "name": "Python Avanzado",
+        "description": "Aprende a liberar tu potencial",
+        "materia": "Python",
+        "duracion": 32,
+        "frecuencia": "On Demand",
+        "costo": 40,
+        "image": "https://i.ytimg.com/vi/RMoYiCRAFlk/maxresdefault.jpg"
+
+      },
+      {
+        "id": 5,
+        "name": "Pensamiento Critico",
+        "description": "Cambia la manera de pensar",
+        "materia": "pensamiento",
+        "duracion": 32,
+        "frecuencia": "On Demand",
+        "costo": 40,
+        "image": "https://i.ytimg.com/vi/Bxw-yQgdG4I/maxresdefault.jpg"
 
       }
     ]

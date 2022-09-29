@@ -9,12 +9,15 @@ import {
   RouterProvider,
 } from "react-router-dom"
 import SingIn from './pages/SingIn';
+import UserProfile from './pages/UserProfile';
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
       <>
           <Route path="/" element={<HomePage/>}/>
           <Route path="singIn/" element={<SingIn/>}/>
+          <Route path="profile/" element={<UserProfile/>}/>
       </>
   )
 );
