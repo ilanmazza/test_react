@@ -2,7 +2,10 @@
     "user": [
       {
         "id": 1,
-        "name": "Carlos Macabro",
+        "name": "Carlos",
+        "lastname": "Macabro",
+        "cel": 648731654,
+        "mail":"ca_macabro@gmail.com",
         "lessons": [1,2,4]
       }
     ],

@@ -6,6 +6,7 @@ import { Typography } from '@mui/material';
 
 import Box from '@mui/material/Box';
 import mock from "../data/mock.json";
+import UserData from '../components/userForm/UserForm';
 
 let mockuser = mock.user.find(x => x.id === 1)
 
@@ -26,6 +27,7 @@ for (const lesson of mock.lessons){
             <Card name={lessons.name} description={lessons.description} costo={lessons.costo} frecuencia={lessons.frecuencia} duracion={lessons.duracion} image={lessons.image}/>
           ))}
        </Grid2>
+       <UserData></UserData>
     </div>
   );
 }
