@@ -5,13 +5,10 @@ import Grid2 from '@mui/material/Unstable_Grid2';
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import mock from "../data/mock.json";
-<<<<<<< HEAD
 import UserData from '../components/userForm/UserForm';
-=======
 import {useNavigate} from 'react-router-dom';
 import userService from '../services/users'
 
->>>>>>> 989ddd0 (toco mucho)
 
 let mockuser = mock.user.find(x => x.id === 1)
 
