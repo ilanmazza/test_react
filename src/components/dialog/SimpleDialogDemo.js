@@ -1,8 +1,9 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import SignIn from '../signIn/Login';
+import MenuItem from '@mui/material/MenuItem';
+
 
 
 function SimpleDialog(props) {
@@ -31,10 +32,9 @@ export default function SimpleDialogDemo() {
   
   return (
     <div>
-      <br />
-      <Button variant="outlined" onClick={handleClickOpen}>
-        INICIA SESION
-      </Button>
+      <MenuItem onClick={handleClickOpen}>
+        Iniciar Sesion
+      </MenuItem>
       <SimpleDialog
         open={open}
         onClose={handleClose}

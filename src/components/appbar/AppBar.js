@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react'
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,6 +15,10 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import SimpleDialogDemo from '../dialog/SimpleDialogDemo';
+import {useNavigate} from 'react-router-dom';
+
+
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -57,7 +61,28 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+
+
 export default function PrimarySearchAppBar() {
+  const navigate = useNavigate();
+  const [user, setUser] = React.useState(null)
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('token_super_cursos')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+    }
+    else{
+      setUser(null)
+    }
+  }, [])
+
+
+  const handleLogout = () => {
+    setUser(null)
+    window.localStorage.removeItem('token_super_cursos')
+    navigate('/')
+  }
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -98,9 +123,12 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+      { user 
+      ? <MenuItem onClick={handleLogout}>Cerrar Sesion</MenuItem>
+      : <SimpleDialogDemo></SimpleDialogDemo> 
+    }
       <MenuItem onClick={handleMenuClose}>Mis Cursos</MenuItem>
       <MenuItem onClick={handleMenuClose}>Mis Profes</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Salir</MenuItem>
     </Menu>
   );
 

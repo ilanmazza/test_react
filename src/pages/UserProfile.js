@@ -7,19 +7,12 @@ import Box from '@mui/material/Box';
 import mock from "../data/mock.json";
 import UserData from '../components/userForm/UserForm';
 import {useNavigate} from 'react-router-dom';
-import userService from '../services/users'
-
 
 let mockuser = mock.user.find(x => x.id === 1)
 
 function UserProfile() {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null)
-
-  const feched_users = userService.getAll()
-
-  console.log(feched_users)
-
+  
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('token_super_cursos')
@@ -31,6 +24,8 @@ function UserProfile() {
       navigate('/')
     }
   }, [])
+  const [user, setUser] = React.useState(null)
+
 
 const available_lessons = []
 for (const lesson of mock.lessons){

@@ -1,11 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+
+
 
 export default function LoginForm ({handleSubmit, ...props}) {
   return (
-      <form onSubmit={handleSubmit}>
+      <form>
         <div>
-          <input
+          <TextField
+            margin="normal"
+            required
+            fullWidth
             type='text'
             value={props.username}
             name='Username'
@@ -14,7 +21,10 @@ export default function LoginForm ({handleSubmit, ...props}) {
           />
         </div>
         <div>
-          <input
+          <TextField
+            margin="normal"
+            required
+            fullWidth
             type='password'
             value={props.password}
             name='Password'
@@ -22,9 +32,9 @@ export default function LoginForm ({handleSubmit, ...props}) {
             onChange={props.handlePasswordChange}
           />
         </div>
-        <button id='form-login-button'>
+        <Button onClick={handleSubmit}>
           Login
-        </button>
+        </Button>
       </form>
   )
 }
