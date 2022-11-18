@@ -6,13 +6,12 @@ import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import mock from "../data/mock.json";
 import UserData from '../components/userForm/UserForm';
-import {useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 let mockuser = mock.user.find(x => x.id === 1)
 
 function UserProfile() {
-  const navigate = useNavigate();
-  
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('token_super_cursos')
@@ -21,10 +20,10 @@ function UserProfile() {
       setUser(user)
     }
     else{
-      navigate('/')
+      <Link to='/'></Link>
     }
   }, [])
-  const [user, setUser] = React.useState(null)
+  
 
 
 const available_lessons = []

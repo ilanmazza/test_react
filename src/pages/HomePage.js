@@ -51,7 +51,7 @@ function HomePage() {
       <Box sx={{ fontStyle: 'normal' }}><Typography>Estos son los cursos mejor puntuados del mes</Typography></Box>      
       <Grid2 container spacing={2} display="flex" justifyContent="center" alignItems="center">
         {mock.lessons.map(lessons => (
-          <Card  name={lessons.name} description={lessons.description} costo={lessons.costo} frecuencia={lessons.frecuencia} duracion={lessons.duracion} image={lessons.image}/>
+          <Card  key={lessons.name} name={lessons.name} description={lessons.description} costo={lessons.costo} frecuencia={lessons.frecuencia} duracion={lessons.duracion} image={lessons.image}/>
         ))}
       </Grid2>
     </div>

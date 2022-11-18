@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import loginService from '../../services/login'
+import Login from '../../services/Login'
 import LoginForm from '../loginForm/LoginForm.js'
 import {useNavigate} from 'react-router-dom';
 
@@ -23,9 +23,8 @@ export default function SignIn() {
     event.preventDefault()
   
     try {
-      const user = await loginService.login({
-        username,
-        password
+      const user = await Login({
+        username, password
       })
   
       window.localStorage.setItem(
