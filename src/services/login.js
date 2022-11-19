@@ -17,7 +17,6 @@ export default function Login ({username,password}) {
     if (!res.ok) throw new Error ('Login endpoint response is NOT ok')
     return res.json()
   }).then(res => {
-    const { token } = res
-    return token
+    return res
   })
 }
