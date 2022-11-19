@@ -10,6 +10,7 @@ import {
 } from "react-router-dom"
 import SingIn from './pages/SingIn';
 import UserProfile from './pages/UserProfile';
+import { UserContextProvider } from './context/UserContext';
 
 
 const router = createBrowserRouter(
@@ -24,9 +25,11 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <div className="App">
-      <RouterProvider router={router}/>
-    </div>
+    <UserContextProvider>
+      <div className="App">
+        <RouterProvider router={router}/>
+      </div>
+    </UserContextProvider>
   );
 }
 

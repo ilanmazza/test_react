@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect} from 'react';
 import AppBar from "../components/appbar/AppBar";
 import Card from '../components/card/Card';
 import Grid2 from '@mui/material/Unstable_Grid2';
@@ -6,24 +6,22 @@ import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import mock from "../data/mock.json";
 import UserData from '../components/userForm/UserForm';
-import {Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
+import useUser from '../hooks/useUser.js';
+
 
 let mockuser = mock.user.find(x => x.id === 1)
 
-function UserProfile() {
-  const [user, setUser] = useState(null)
+export default function UserProfile() {
+  const navigate = useNavigate();
+  const {isLogged} = useUser()
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('token_super_cursos')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
+    if (!isLogged){
+      console.log('User is not logged in')
+      navigate('/')  
     }
-    else{
-      <Link to='/'></Link>
-    }
-  }, [])
-  
+},[isLogged,navigate])
 
 
 const available_lessons = []
@@ -40,12 +38,10 @@ for (const lesson of mock.lessons){
       <Box sx={{ fontStyle: 'normal' }}><Typography>Estos son tus cursos:</Typography></Box>      
       <Grid2 container spacing={2} display="flex" justifyContent="center" alignItems="center">
         {available_lessons.map(lessons => (
-            <Card name={lessons.name} description={lessons.description} costo={lessons.costo} frecuencia={lessons.frecuencia} duracion={lessons.duracion} image={lessons.image}/>
+            <Card key={lessons.name} name={lessons.name} description={lessons.description} costo={lessons.costo} frecuencia={lessons.frecuencia} duracion={lessons.duracion} image={lessons.image}/>
           ))}
        </Grid2>
        <UserData></UserData>
     </div>
   );
 }
-
-export default UserProfile;

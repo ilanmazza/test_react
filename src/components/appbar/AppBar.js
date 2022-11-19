@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -17,6 +17,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import SimpleDialogDemo from '../dialog/SimpleDialogDemo';
 import {useNavigate} from 'react-router-dom';
+import useUser from '../../hooks/useUser.js';
 
 
 
@@ -65,22 +66,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function PrimarySearchAppBar() {
   const navigate = useNavigate();
-  const [user, setUser] = React.useState(null)
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('token_super_cursos')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-    }
-    else{
-      setUser(null)
-    }
-  }, [])
+  const {isLogged, logout} = useUser()
 
 
   const handleLogout = () => {
-    setUser(null)
-    window.localStorage.removeItem('token_super_cursos')
+    logout()
     navigate('/')
   }
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -123,7 +113,7 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      { user 
+      { isLogged 
       ? <MenuItem onClick={handleLogout}>Cerrar Sesion</MenuItem>
       : <SimpleDialogDemo></SimpleDialogDemo> 
     }

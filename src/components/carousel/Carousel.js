@@ -34,8 +34,8 @@ export default function Example(props)
             fullHeightHover='true'
             stopAutoPlayOnHover= 'true'
             height=''
-            next={ (next, active) => console.log(`we left ${active}, and are now at ${next}`) }
-            prev={ (prev, active) => console.log(`we left ${active}, and are now at ${prev}`) }
+            //next={ (next, active) => console.log(`we left ${active}, and are now at ${next}`) }
+            //prev={ (prev, active) => console.log(`we left ${active}, and are now at ${prev}`) }
             indicatorIconButtonProps={{
               style: {
                   padding: '10px',    
