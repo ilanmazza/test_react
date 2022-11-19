@@ -1,8 +1,7 @@
 import { useCallback, useContext, useState } from "react";
 import Context from "../context/UserContext";
 import loginService from '../services/Login';
-
-
+import createUserService from '../services/Users'
 
 export default function useUser () {
     const {session, setSession} = useContext(Context)
@@ -36,5 +35,30 @@ export default function useUser () {
         hasLoginError: state.error,
         login,
         logout
+    }
+}
+
+
+export function useCreateUser () {
+    const [createState, setCreateState] = useState({loading: false, error: false, done: false})
+
+    const createUser = useCallback((userdata) => {
+        setCreateState({loading: true, error: false})
+        createUserService(userdata)
+            .then(response => {
+                setCreateState({loading: false, error: false, done: true})
+                console.log(response)
+            })
+            .catch(err => {
+                setCreateState({loading: false, error: true, done: true})
+                console.error(err)
+            })
+    }, [])
+
+    return {
+        isCreateLoading: createState.loading,
+        hasCreateError: createState.error,
+        hasCreated: createState.done,
+        createUser
     }
 }

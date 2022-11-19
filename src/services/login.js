@@ -1,12 +1,6 @@
-//import axios from 'axios'
-
 const baseUrl = 'http://localhost:3001/api/login'
 
-//export default function Login (credentials) {
-//  return axios.post(baseUrl, credentials)
-//}
-
-export default function Login ({username,password}) {
+export default function loginService ({username,password}) {
   return fetch(baseUrl, {
     method: 'POST',
     headers: {

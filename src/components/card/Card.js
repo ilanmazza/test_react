@@ -31,7 +31,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function RecipeReviewCard({id, name, description, materia, duracion, frecuencia,costo,image}) {
+export default function RecipeReviewCard({id, name, description, materia, duracion, frecuencia,costo,image,raiting}) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -67,7 +67,7 @@ export default function RecipeReviewCard({id, name, description, materia, duraci
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="rating">
-          <BasicRating></BasicRating>
+          <BasicRating raiting={raiting}></BasicRating>
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />

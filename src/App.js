@@ -8,7 +8,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom"
-import SingIn from './pages/SingIn';
+import SignUp from './pages/SignUp';
 import UserProfile from './pages/UserProfile';
 import { UserContextProvider } from './context/UserContext';
 
@@ -17,7 +17,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
       <>
           <Route path="/" element={<HomePage/>}/>
-          <Route path="singIn/" element={<SingIn/>}/>
+          <Route path="signUp/" element={<SignUp/>}/>
           <Route path="profile/" element={<UserProfile/>}/>
       </>
   )

@@ -1,11 +1,8 @@
 import React, {useEffect,useContext} from 'react';
 import AppBar from "../components/appbar/AppBar";
-import Card from '../components/card/Card';
-import Grid2 from '@mui/material/Unstable_Grid2';
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import mock from "../data/mock.json";
-import UserData from '../components/userForm/UserForm';
 import {useNavigate} from 'react-router-dom';
 import useUser from '../hooks/useUser.js';
 import Context from "../context/UserContext";

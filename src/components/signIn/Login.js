@@ -4,7 +4,6 @@ import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-//import Login from '../../services/Login'
 import useUser from '../../hooks/useUser.js';
 import LoginForm from '../loginForm/LoginForm.js';
 
@@ -21,7 +20,7 @@ export default function SignIn() {
     event.preventDefault()
   
     try {
-      await login({
+      login({
         username, password
       })      
       setUsername('')
@@ -52,7 +51,7 @@ export default function SignIn() {
               handleUsernameChange={({ target }) => setUsername(target.value)}
               handlePasswordChange={({ target }) => setPassword(target.value)}
               handleSubmit={handleLogin} />
-              <Link href="singIn/" variant="body2">
+              <Link href="singUp/" variant="body2">
                 "Todavia no tenes cuenta! Registrate"
               </Link>
             </>
