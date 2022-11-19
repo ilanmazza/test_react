@@ -1,6 +1,6 @@
 import React from 'react';
 import Carousel from 'react-material-ui-carousel'
-import { Paper, Button } from '@mui/material'
+import { Paper } from '@mui/material'
 import ArrowLeftSharpIcon from '@mui/icons-material/ArrowLeftSharp';
 import ArrowRightSharpIcon from '@mui/icons-material/ArrowRightSharp';
 
@@ -34,8 +34,6 @@ export default function Example(props)
             fullHeightHover='true'
             stopAutoPlayOnHover= 'true'
             height=''
-            //next={ (next, active) => console.log(`we left ${active}, and are now at ${next}`) }
-            //prev={ (prev, active) => console.log(`we left ${active}, and are now at ${prev}`) }
             indicatorIconButtonProps={{
               style: {
                   padding: '10px',    

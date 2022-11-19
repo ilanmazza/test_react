@@ -14,12 +14,10 @@ export default function Login ({username,password}) {
     },
     body: JSON.stringify({username,password})
   }).then(res => {
-    if (!res.ok) console.log('Error en login')
+    if (!res.ok) throw new Error ('Login endpoint response is NOT ok')
     return res.json()
   }).then(res => {
     const { token } = res
-    console.log('Login correcto')
-    console.log(token)
     return token
   })
 }

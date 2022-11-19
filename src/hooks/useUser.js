@@ -25,8 +25,6 @@ export default function useUser () {
             })
     }, [setJWT])
 
-    console.log(jwt)
-
     const logout = useCallback(() => {
         window.sessionStorage.removeItem('jwt')
         setJWT(null)
