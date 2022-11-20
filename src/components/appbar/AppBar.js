@@ -95,7 +95,6 @@ export default function PrimaryAppBar() {
   const handleSearchChange = event => {
     event.preventDefault()
     setSearchTerm(event.target.value)
-    console.log(searchTerm)
   }
 
   const menuId = 'primary-search-account-menu';

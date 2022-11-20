@@ -4,7 +4,6 @@ import Card from '../components/card/Card';
 import Grid2 from '@mui/material/Unstable_Grid2';
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
 import FeatureBanner from '../components/featureBanner/FeatureBanner';
 import {GetTopCourses} from '../services/Courses'
 import Container from '@mui/material/Container';
@@ -30,12 +29,6 @@ function HomePage() {
       <AppBar></AppBar>
       <Container maxWidth="lg">
       <FeatureBanner post={featureBanner} />
-
-      <Stepper 
-        orientation='vertical'
-
-      >
-      </Stepper>
 
       <Box sx={{ fontStyle: 'oblique' }}><Typography>API Cursos es una plataforma para realizar cursos directamente desde las ofertas creadas por los profesores. Es una aplicacion sin fines de lucro para compartir conocimiento.</Typography></Box>
       <Box sx={{ fontStyle: 'normal' }}><Typography>Estos son los cursos mejor puntuados del mes</Typography></Box>      
