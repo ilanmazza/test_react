@@ -7,8 +7,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import useUser from '../../hooks/useUser.js';
 import LoginForm from '../loginForm/LoginForm.js';
 
-
-
 const theme = createTheme();
 
 export default function SignIn() {
@@ -51,7 +49,7 @@ export default function SignIn() {
               handleUsernameChange={({ target }) => setUsername(target.value)}
               handlePasswordChange={({ target }) => setPassword(target.value)}
               handleSubmit={handleLogin} />
-              <Link href="singUp/" variant="body2">
+              <Link href="signUp/" variant="body2">
                 "Todavia no tenes cuenta! Registrate"
               </Link>
             </>

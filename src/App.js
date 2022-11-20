@@ -10,6 +10,8 @@ import {
 } from "react-router-dom"
 import SignUp from './pages/SignUp';
 import UserProfile from './pages/UserProfile';
+import CoursesList from './pages/CoursesList';
+import MyContracts from './pages/MyContracts';
 import { UserContextProvider } from './context/UserContext';
 
 
@@ -18,6 +20,8 @@ const router = createBrowserRouter(
       <>
           <Route path="/" element={<HomePage/>}/>
           <Route path="signUp/" element={<SignUp/>}/>
+          <Route path="coursesList/" element={<CoursesList/>}/>
+          <Route path="myContracts/" element={<MyContracts/>}/>
           <Route path="profile/" element={<UserProfile/>}/>
       </>
   )

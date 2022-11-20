@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -6,21 +6,14 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreIcon from '@mui/icons-material/MoreVert';
 import SimpleDialogDemo from '../dialog/SimpleDialogDemo';
-import {useNavigate} from 'react-router-dom';
+import {Form, useNavigate} from 'react-router-dom';
 import useUser from '../../hooks/useUser.js';
-
-
-
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -63,10 +56,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 
-
-export default function PrimarySearchAppBar() {
+export default function PrimaryAppBar() {
   const navigate = useNavigate();
   const {isLogged, logout} = useUser()
+  const [searchTerm,setSearchTerm] = useState('')
 
 
   const handleLogout = () => {
@@ -74,27 +67,36 @@ export default function PrimarySearchAppBar() {
     navigate('/')
   }
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
   const handleMenuClose = () => {
     setAnchorEl(null);
-    handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
+  // Seguro que hay una mejor manera de hacer esto
+  const handleProfile = () => {
+    navigate('/profile')
+  }
+  // Seguro que hay una mejor manera de hacer esto
+  const handleContracts = () => {
+    navigate('/myContracts')
+  }
+
+  const handleSearch = event => {
+    event.preventDefault()
+    navigate('/coursesList?search='+searchTerm)
+  }
+
+  const handleSearchChange = event => {
+    event.preventDefault()
+    setSearchTerm(event.target.value)
+    console.log(searchTerm)
+  }
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -114,65 +116,17 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       { isLogged 
-      ? <MenuItem onClick={handleLogout}>Cerrar Sesion</MenuItem>
+      ?<div>
+      <MenuItem onClick={handleLogout}>Cerrar Sesion</MenuItem>
+      <MenuItem onClick={handleProfile}>Perfil</MenuItem>
+      <MenuItem onClick={handleContracts}>Mis Contratos</MenuItem>
+      </div>
       : <SimpleDialogDemo></SimpleDialogDemo> 
     }
-      <MenuItem onClick={handleMenuClose}>Mis Cursos</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Mis Profes</MenuItem>
+
     </Menu>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -186,7 +140,7 @@ export default function PrimarySearchAppBar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            <HomeIcon />
           </IconButton>
           <Typography
             href="/"
@@ -201,27 +155,16 @@ export default function PrimarySearchAppBar() {
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
+            <Form onSubmit={handleSearch}>
             <StyledInputBase
+              onChange={handleSearchChange}
               placeholder="Buscar cursos.."
-              inputProps={{ 'aria-label': 'search' }}
+              value={searchTerm}
             />
+            </Form>
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={8} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={1} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
             <IconButton
               size="large"
               edge="end"
@@ -238,17 +181,15 @@ export default function PrimarySearchAppBar() {
             <IconButton
               size="large"
               aria-label="show more"
-              aria-controls={mobileMenuId}
               aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
+              onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <MoreIcon />
+              <AccountCircle />
             </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
       {renderMenu}
     </Box>
   );
