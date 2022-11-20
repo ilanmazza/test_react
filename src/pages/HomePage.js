@@ -1,6 +1,6 @@
 import React, {useEffect,useState} from 'react';
 import AppBar from "../components/appbar/AppBar";
-import Card from '../components/card/Card';
+import Card from '../components/courseCard/CourseCard';
 import Grid2 from '@mui/material/Unstable_Grid2';
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -23,7 +23,6 @@ function HomePage() {
   useEffect(function() {
     GetTopCourses().then(topCourses =>setTopCourses(topCourses))
   },[setTopCourses])
-  console.log(topCourses)
   return (
     <div className="HomePage">
       <AppBar></AppBar>
@@ -34,7 +33,7 @@ function HomePage() {
       <Box sx={{ fontStyle: 'normal' }}><Typography>Estos son los cursos mejor puntuados del mes</Typography></Box>      
       <Grid2 container spacing={2} display="flex" justifyContent="center" alignItems="center">
         {topCourses.map(lessons => (
-          <Card  key={lessons.name} raiting={lessons.raiting[0]} name={lessons.name} description={lessons.description} costo={lessons.costo} frecuencia={lessons.frecuencia} duracion={lessons.duracion} image='https://i.ytimg.com/vi/bYOjmW-740M/maxresdefault.jpg'/>
+          <Card {...lessons} key={lessons.id}/>
         ))}
       </Grid2>
       </Container>

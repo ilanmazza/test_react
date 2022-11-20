@@ -58,7 +58,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function PrimaryAppBar() {
   const navigate = useNavigate();
-  const {isLogged, logout} = useUser()
+  const {isLogged, logout, session} = useUser()
   const [searchTerm,setSearchTerm] = useState('')
 
 
@@ -86,6 +86,11 @@ export default function PrimaryAppBar() {
   const handleContracts = () => {
     navigate('/myContracts')
   }
+
+    // Seguro que hay una mejor manera de hacer esto
+    const handleCourses = () => {
+      navigate('/myCourses')
+    }
 
   const handleSearch = event => {
     event.preventDefault()
@@ -119,6 +124,9 @@ export default function PrimaryAppBar() {
       <MenuItem onClick={handleLogout}>Cerrar Sesion</MenuItem>
       <MenuItem onClick={handleProfile}>Perfil</MenuItem>
       <MenuItem onClick={handleContracts}>Mis Contratos</MenuItem>
+      { session.role === "Teacher" &&
+      <MenuItem onClick={handleCourses}>Mis Cursos Dictados</MenuItem>
+      }
       </div>
       : <SimpleDialogDemo></SimpleDialogDemo> 
     }

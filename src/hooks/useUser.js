@@ -33,6 +33,7 @@ export default function useUser () {
         isLogged : Boolean(session),
         isLoginLoading: state.loading,
         hasLoginError: state.error,
+        session: session,
         login,
         logout
     }

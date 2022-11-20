@@ -2,7 +2,6 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
@@ -10,15 +9,14 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Rating from '@mui/material/Rating';
 
-import TextField from '@mui/material/TextField';
+
 
 import Grid from '@mui/material/Unstable_Grid2';
 
-import BasicRating from "../rating/Rating"
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -31,7 +29,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function RecipeReviewCard({id, name, description, materia, duracion, frecuencia,costo,image,raiting}) {
+export default function CourseCard(courseObject) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -44,7 +42,7 @@ export default function RecipeReviewCard({id, name, description, materia, duraci
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+            {courseObject.name.charAt(0).toUpperCase()}
           </Avatar>
         }
         action={
@@ -52,26 +50,19 @@ export default function RecipeReviewCard({id, name, description, materia, duraci
             <MoreVertIcon />
           </IconButton>
         }
-        title={name}
-      />
-      <CardMedia
-        component="img"
-        height="194"
-        image={image}
-        alt="Courses Image"
+        title={courseObject.name}
       />
       <CardContent>
+      {courseObject.type.map(type => (
+            <Typography key={type} variant="caption">{type} </Typography>
+        ))}
         <Typography variant="body2" color="text.secondary">
-          {description}
+          {courseObject.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="rating">
-          <BasicRating raiting={raiting}></BasicRating>
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+          <Rating name="half-rating-read" defaultValue={courseObject.raiting[0]} precision={0.1} readOnly />
+          <Typography >({courseObject.raiting[1]})</Typography>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -83,14 +74,11 @@ export default function RecipeReviewCard({id, name, description, materia, duraci
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Precio {costo} U$D</Typography>
-          <Typography paragraph>
-            La frecuencia es {frecuencia} y la duracion {duracion}
-          </Typography>
-          <Typography paragraph>
-            ACA MOSTRAMOS LOS COMENTARIOS DESTACADOS
-          </Typography>
-          <TextField fullWidth id="standard-basic" label="Comentar" variant="standard" />
+          <Typography paragraph>Costo: {courseObject.cost}</Typography>
+          <Typography paragraph>Frecuencia: {courseObject.periodicity}</Typography>
+          {courseObject.comments.map(comment => (
+            comment.state === "Aprobado" && <Typography key={comment.ownedBy} variant="caption">{comment.comment}</Typography>
+        ))}
         </CardContent>
       </Collapse>
     </Card>

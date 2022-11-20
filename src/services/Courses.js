@@ -1,10 +1,11 @@
-const baseUrl = 'http://localhost:3001/api/courses/filter'
+const filterEndpoint = 'http://localhost:3001/api/courses/filter'
+const fromTeacherEndpoint = 'http://localhost:3001/api/courses/fromTeacher'
 
 export function GetTopCourses () {
-  return fetch(baseUrl+'?'+ new URLSearchParams({
+  return fetch(filterEndpoint+'?'+ new URLSearchParams({
     orderBy: 'raiting: -1',
     limit: 5})).then(res => {
-    if (!res.ok) throw new Error ('api/cousers/filter endpoint response is NOT ok')
+    if (!res.ok) throw new Error (`${filterEndpoint} endpoint response is NOT ok`)
     return res.json()
   }).then(res => {
     return res
@@ -12,12 +13,27 @@ export function GetTopCourses () {
 }
 
 export function GetFilterCourses (inName,inType) {
-  return fetch(baseUrl+'?'+ new URLSearchParams({
+  return fetch(filterEndpoint+'?'+ new URLSearchParams({
     orderBy: 'raiting: -1',
     name: inName,
     type: inType,
     limit: 5})).then(res => {
-    if (!res.ok) throw new Error ('api/cousers/filter endpoint response is NOT ok')
+    if (!res.ok) throw new Error (`${filterEndpoint} endpoint response is NOT ok`)
+    return res.json()
+  }).then(res => {
+    return res
+  })
+}
+
+export function GetTeacherCourses (token) {
+  return fetch(fromTeacherEndpoint, {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
+    }
+  }).then(res => {
+    if (!res.ok) throw new Error (`${fromTeacherEndpoint} endpoint response is NOT ok`)
     return res.json()
   }).then(res => {
     return res
