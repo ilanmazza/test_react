@@ -6,7 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 
 
-function SimpleDialog(props) {
+export function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;
   const handleClose = () => {
     onClose(selectedValue);

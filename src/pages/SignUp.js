@@ -26,7 +26,7 @@ export default function SignUp() {
 
   useEffect(() => {
     if (hasCreated && !hasCreateError){
-      console.log('me voy')
+      console.log('Back to home')
       navigate('/')  
     }
   },[hasCreated,hasCreateError,navigate])

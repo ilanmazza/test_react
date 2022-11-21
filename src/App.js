@@ -13,6 +13,8 @@ import UserProfile from './pages/UserProfile';
 import CoursesList from './pages/CoursesList';
 import MyContracts from './pages/MyContracts';
 import MyCourses from './pages/MyCourses';
+import EditCourse from './pages/EditCourse';
+import CreateContract from './pages/CreateContract';
 
 import { UserContextProvider } from './context/UserContext';
 
@@ -26,6 +28,8 @@ const router = createBrowserRouter(
           <Route path="myContracts/" element={<MyContracts/>}/>
           <Route path="myCourses/" element={<MyCourses/>}/>
           <Route path="profile/" element={<UserProfile/>}/>
+          <Route path="createContract/" element={<CreateContract/>}/>
+          <Route path="editCourse/" element={<EditCourse/>}/>
       </>
   )
 );

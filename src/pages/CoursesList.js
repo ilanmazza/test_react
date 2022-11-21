@@ -34,32 +34,35 @@ export default function CoursesList () {
     navigate('/coursesList?search='+searchName+'&type='+searchType)
   }
   
+  console.log(topCourses)
 
   return (
     <div className="CoursesList">
       <AppBar></AppBar>
       <Grid2 container spacing={2} display="flex" justifyContent="center" alignItems="center">
-      <Grid2 xs={12}>
-      <Card sx={{ minWidth: 275 }}>
-        <CardContent>
-          <TextField
-            id="searchName"
-            label="Curso"
-            value={searchName}
-            onChange={handleChangeSearchName}
-          />
-          <TextField
-            id="searchCategory"
-            label="Categoria"
-            value={searchType}
-            onChange={handleChangeSearchType}
-          />
-        </CardContent>
-      </Card>
+        <Grid2 xs={12}>
+          <Card sx={{ minWidth: 275 }}>
+            <CardContent>
+              <TextField
+                id="searchName"
+                label="Curso"
+                value={searchName}
+                onChange={handleChangeSearchName}
+              />
+              <TextField
+                id="searchCategory"
+                label="Categoria"
+                value={searchType}
+                onChange={handleChangeSearchType}
+              />
+            </CardContent>
+          </Card>
         </Grid2>
+        <Grid2 container spacing={2} display="flex" justifyContent="center" alignItems="center">
         {topCourses.map(lessons => (
-          <CustomCard  key={lessons.name} raiting={lessons.raiting[0]} name={lessons.name} description={lessons.description} costo={lessons.costo} frecuencia={lessons.frecuencia} duracion={lessons.duracion} image='https://i.ytimg.com/vi/bYOjmW-740M/maxresdefault.jpg'/>
+          <CustomCard {...lessons} key={lessons.id}/>
         ))}
+      </Grid2>
       </Grid2>
     </div>
   );
