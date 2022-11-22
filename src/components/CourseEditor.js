@@ -15,7 +15,6 @@ export function CourseEditor(courseObject) {
     const {isEditLoading, hasEditError, hasEdited, editCourse} = useEditCourse()
     const [courseState,setCourseState] = useState(courseObject.state)
     const { session } = useUser()
-    console.log(courseObject)
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -27,7 +26,6 @@ export function CourseEditor(courseObject) {
         object['id'] = courseObject.id
         object['state'] = courseState
 
-        console.log(JSON.stringify(object));
         try {
             editCourse(object, session.token)
         } catch (e) {

@@ -5,7 +5,7 @@ const basicEndpoint = 'http://localhost:3001/api/courses'
 
 export function GetTopCourses () {
   return fetch(filterEndpoint+'?'+ new URLSearchParams({
-    orderBy: 'raiting: -1',
+    orderBy: 'rating: -1',
     limit: 5})).then(res => {
     if (!res.ok) throw new Error (`${filterEndpoint} endpoint response is NOT ok`)
     return res.json()
@@ -16,7 +16,7 @@ export function GetTopCourses () {
 
 export function GetFilterCourses (inName,inType) {
   return fetch(filterEndpoint+'?'+ new URLSearchParams({
-    orderBy: 'raiting: -1',
+    orderBy: 'rating: -1',
     name: inName,
     type: inType,
     limit: 5})).then(res => {

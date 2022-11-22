@@ -133,8 +133,8 @@ export default function CourseCard(courseObject) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-          <Rating name="half-rating-read" defaultValue={courseObject.raiting[0]} precision={0.1} readOnly />
-          <Typography >({courseObject.raiting[1]})</Typography>
+          <Rating name="half-rating-read" defaultValue={courseObject.rating[0]} precision={0.1} readOnly />
+          <Typography >({courseObject.rating[1]})</Typography>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
