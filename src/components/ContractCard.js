@@ -62,23 +62,22 @@ export function ContractCard(courseObject) {
   const [ratingValue, setRatingValue] = React.useState(courseObject.rating || 2.5);
   const [ratingHover, setRatingHover] = React.useState(-1);
   const {isRatingLoading, hasRated, rateContract} = useRateContract()
-  const handleChangeRatingValue = (event, newValue) => {
+  const handleChangeRatingValue = () => {
     if (!isRatingLoading && !hasRated ){
-      rateContract(courseObject.id,newValue,session.token)
-      setRatingValue(newValue)
+      rateContract(courseObject.id,ratingHover,session.token)
+      setRatingValue(ratingHover)
     }
   }
 
+  const [commentContentState, setCommentContentState] = React.useState((courseObject.comment && courseObject.comment.comment) || undefined)
+  const [commentState, setCommentState] = React.useState((courseObject.comment && courseObject.comment.state) || undefined)
   const {isCommentLoading , commentContract} = useCommentContract()
   const handleComment = () => {
-    if (!isRatingLoading && !hasRated ){
-      const commentTextField = document.getElementById("comment-" + courseObject.id)
-      setCommentState('Pendiente')
-      commentContract(courseObject.id,commentTextField.value,session.token)
-    }
+    const commentTextField = document.getElementById("comment-" + courseObject.id)
+    setCommentContentState(commentTextField.value)
+    setCommentState('Pendiente')
+    commentContract(courseObject.id,commentTextField.value,session.token)
   }
-
-  const [commentState, setCommentState] = React.useState((courseObject.comment && courseObject.comment.state) || undefined)
   const handleCommentAccept = () => {
       setCommentState('Aceptado')
       ModerateComment(courseObject.id,'Aceptado',session.token)
@@ -174,12 +173,12 @@ export function ContractCard(courseObject) {
           <Typography align="left" paragraph>{courseObject.courseid.description}</Typography>
           <Typography align="left" paragraph>Costo: {courseObject.courseid.cost}</Typography>
           <Typography align="left" paragraph>Frecuencia: {courseObject.courseid.periodicity}</Typography>
-          {!courseObject.rating && session.role === 'Student' && !["Cancelada","Solicitada"].includes(contractState) &&
+          {!["Cancelada","Solicitada"].includes(contractState) && (session.role === 'Student' || courseObject.rating ) &&
           <Rating
             name="hover-feedback"
             value={ratingValue}
-            readOnly={isRatingLoading || hasRated}
             precision={0.5}
+            readOnly={session.role === 'Teacher'}
             getLabelText={getLabelText}
             onChange={handleChangeRatingValue}
             onChangeActive={(event, newHover) => {
@@ -188,19 +187,16 @@ export function ContractCard(courseObject) {
             emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
           />
           }
-        {courseObject.rating && 
-          <Rating name="half-rating-read" defaultValue={courseObject.rating} precision={0.5} readOnly />
-        }
         {ratingValue !== null && (session.role === 'Student' || courseObject.rating ) && !["Cancelada","Solicitada"].includes(contractState) && (
         <Box sx={{ ml: 2 }}>{labels[ratingHover !== -1 ? ratingHover : ratingValue]}</Box>
         )}
-        {courseObject.comment && session.role === 'Student'
+        {(courseObject.comment || commentState) && session.role === 'Student'
         ? <>
             <Typography align="left" variant="subtitle2">Estado: {commentState}</Typography>
-            <TextField fullWidth name="comment" label="Que opinaste del curso?" id={"comment-" + courseObject.id} defaultValue={courseObject.comment.comment} autoComplete="new-comment"/>
+            <TextField fullWidth name="comment" label="Que opinaste del curso?" id={"comment-" + courseObject.id} defaultValue={commentContentState} autoComplete="new-comment"/>
           </>
         : (!courseObject.comment && session.role === 'Student' && !["Cancelada","Solicitada"].includes(contractState) &&
-            <TextField fullWidth name="comment" label="Que opinaste del curso?" id={"comment-" + courseObject.id} defaultValue='' autoComplete="new-comment"/>
+            <TextField fullWidth name="comment" label="Que opinaste del curso?" id={"comment-" + courseObject.id} defaultValue={commentContentState} autoComplete="new-comment"/>
           )
         }
         {!["Cancelada","Solicitada"].includes(contractState) && session.role === 'Student'
