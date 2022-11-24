@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
-import mock from "../../data/mock.json"
+import mock from "../data/mock.json"
 
 let mockuser = mock.user.find(x => x.id === 1)
 

@@ -1,12 +1,12 @@
 import React, {useEffect,useContext,useState} from 'react';
-import AppBar from "../components/appbar/AppBar";
+import AppBar from "../components/AppBar";
 import { Typography } from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import useUser from '../hooks/useUser.js';
 import Context from "../context/UserContext";
 import {GetTeacherCourses} from '../services/Courses'
 import Grid2 from '@mui/material/Unstable_Grid2';
-import { CourseCard } from '../components/courseCard/CourseCard';
+import { CourseCard } from '../components/CourseCard';
 import Button from '@mui/material/Button';
 
 

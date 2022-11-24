@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import AppBar from "../components/appbar/AppBar";
+import AppBar from "../components/AppBar";
 import {useNavigate} from 'react-router-dom';
 import useUser from '../hooks/useUser';
 import {CourseCreator} from '../components/CourseCreator';

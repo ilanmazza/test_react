@@ -1,6 +1,7 @@
 const filterEndpoint = 'http://localhost:3001/api/courses/filter'
 const fromTeacherEndpoint = 'http://localhost:3001/api/courses/fromTeacher'
 const basicEndpoint = 'http://localhost:3001/api/courses'
+const detailsEndpoint = 'http://localhost:3001/api/courses/details'
 
 
 export function GetTopCourses () {
@@ -82,6 +83,20 @@ export function GetCoursesById (id) {
     }
   }).then(res => {
     if (!res.ok) throw new Error (`${basicEndpoint} endpoint response is NOT ok`)
+    return res.json()
+  }).then(res => {
+    return res
+  })
+}
+
+export function GetCourseDetailsById (id) {
+  return fetch(detailsEndpoint+'/'+id, {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(res => {
+    if (!res.ok) throw new Error (`${detailsEndpoint} endpoint response is NOT ok`)
     return res.json()
   }).then(res => {
     return res

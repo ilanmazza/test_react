@@ -1,7 +1,7 @@
 import * as React from 'react';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-import SignIn from '../signIn/Login';
+import SignIn from './Login';
 import MenuItem from '@mui/material/MenuItem';
 
 
@@ -21,7 +21,7 @@ export function SimpleDialog(props) {
   );
 }
 
-export default function SimpleDialogDemo() {
+export default function LoginDialog() {
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     setOpen(true);

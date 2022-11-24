@@ -1,10 +1,10 @@
 import React, {useEffect,useState} from 'react';
-import AppBar from "../components/appbar/AppBar";
-import { CourseCard } from '../components/courseCard/CourseCard';
+import AppBar from "../components/AppBar";
+import { CourseCard } from '../components/CourseCard';
 import Grid2 from '@mui/material/Unstable_Grid2';
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
-import FeatureBanner from '../components/featureBanner/FeatureBanner';
+import FeatureBanner from '../components/FeatureBanner';
 import {GetTopCourses} from '../services/Courses'
 import Container from '@mui/material/Container';
 

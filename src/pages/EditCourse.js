@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from 'react';
-import AppBar from "../components/appbar/AppBar";
+import AppBar from "../components/AppBar";
 import {useNavigate,useSearchParams} from 'react-router-dom';
 import useUser from '../hooks/useUser';
 import {GetCoursesById} from '../services/Courses'

@@ -11,9 +11,9 @@ import Menu from '@mui/material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import SimpleDialogDemo from '../dialog/SimpleDialogDemo';
+import SimpleDialogDemo from './LoginDialog';
 import {Form, useNavigate} from 'react-router-dom';
-import useUser from '../../hooks/useUser.js';
+import useUser from '../hooks/useUser.js';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',

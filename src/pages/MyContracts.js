@@ -1,5 +1,5 @@
 import React, {useEffect,useContext,useState} from 'react';
-import AppBar from "../components/appbar/AppBar";
+import AppBar from "../components/AppBar";
 import {Typography} from '@mui/material';
 import Box from '@mui/material/Box';
 import {useNavigate} from 'react-router-dom';

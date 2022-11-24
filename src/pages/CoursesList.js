@@ -1,6 +1,6 @@
 import React, {useEffect,useState} from 'react';
-import AppBar from "../components/appbar/AppBar";
-import { CourseCard } from '../components/courseCard/CourseCard';
+import AppBar from "../components/AppBar";
+import { CourseCard } from '../components/CourseCard';
 import Grid2 from '@mui/material/Unstable_Grid2';
 import {GetFilterCourses} from '../services/Courses'
 import TextField from '@mui/material/TextField';

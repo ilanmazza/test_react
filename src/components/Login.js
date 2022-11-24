@@ -4,8 +4,8 @@ import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import useUser from '../../hooks/useUser.js';
-import LoginForm from '../loginForm/LoginForm.js';
+import useUser from '../hooks/useUser.js';
+import LoginForm from './LoginForm.js';
 import Typography from '@mui/material/Typography';
 
 

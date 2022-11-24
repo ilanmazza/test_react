@@ -1,5 +1,5 @@
 import React from 'react';
-import useUser from '../../hooks/useUser.js';
+import useUser from '../hooks/useUser.js';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -13,7 +13,7 @@ import { red } from '@mui/material/colors';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Rating from '@mui/material/Rating';
 import Grid from '@mui/material/Unstable_Grid2';
-import {SimpleDialog} from '../dialog/SimpleDialogDemo'
+import {SimpleDialog} from './LoginDialog'
 import BuildIcon from '@mui/icons-material/Build';
 import {useNavigate} from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
