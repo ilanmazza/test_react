@@ -34,7 +34,7 @@ const ExpandMore = styled((props) => {
 
 
 
-export default function CourseCard(courseObject) {
+export function CourseCard(courseObject) {
   const navigate = useNavigate();
 
   const {isLogged, session} = useUser()
@@ -148,9 +148,6 @@ export default function CourseCard(courseObject) {
         <CardContent>
           <Typography paragraph>Costo: {courseObject.cost}</Typography>
           <Typography paragraph>Frecuencia: {courseObject.periodicity}</Typography>
-          {courseObject.comments.map(comment => (
-            comment.state === "Aprobado" && <Typography key={comment.ownedby} variant="caption">{comment.comment}</Typography>
-        ))}
         </CardContent>
       </Collapse>
     </Card>

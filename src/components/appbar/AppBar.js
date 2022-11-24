@@ -137,7 +137,7 @@ export default function PrimaryAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar sx={{ bgcolor: "green" }} position="static">
         <Toolbar>
           <IconButton
             href="/"
@@ -156,7 +156,7 @@ export default function PrimaryAppBar() {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            API Cursos Online
+            StudyTime
           </Typography>
           <Search>
             <SearchIconWrapper>

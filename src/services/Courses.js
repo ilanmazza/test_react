@@ -43,6 +43,22 @@ export function EditCourse (data,token) {
   })
 }
 
+export function CreateCourse (data,token) {
+  return fetch(basicEndpoint, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer "+token
+    },
+    body: JSON.stringify(data)
+  }).then(res => {
+    if (!res.ok) throw new Error (`${basicEndpoint} endpoint response is NOT ok`)
+    return res.json()
+  }).then(res => {
+    return res
+  })
+}
+
 export function GetTeacherCourses (token) {
   return fetch(fromTeacherEndpoint, {
     method: 'GET',

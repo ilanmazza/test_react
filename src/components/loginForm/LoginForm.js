@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-
+import Box from '@mui/material/Box';
 
 
 export default function LoginForm ({handleSubmit, ...props}) {
@@ -14,10 +14,11 @@ export default function LoginForm ({handleSubmit, ...props}) {
             required
             fullWidth
             type='text'
-            value={props.username}
-            name='Username'
-            placeholder='Username'
-            onChange={props.handleUsernameChange}
+            value={props.email}
+            name='Email'
+            placeholder='Email'
+            autoComplete="email"
+            onChange={props.handleEmailChange}
           />
         </div>
         <div>
@@ -29,18 +30,21 @@ export default function LoginForm ({handleSubmit, ...props}) {
             value={props.password}
             name='Password'
             placeholder='Password'
+            autoComplete="current-password"
             onChange={props.handlePasswordChange}
           />
         </div>
-        <Button onClick={handleSubmit}>
-          Login
-        </Button>
+        <Box textAlign='center' sx={{ m: 1 }}>
+          <Button variant="contained" color="success" onClick={handleSubmit}>
+            Login
+          </Button>
+        </Box>
       </form>
   )
 }
 
 LoginForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  username: PropTypes.string,
+  email: PropTypes.string,
 
 }

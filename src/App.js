@@ -15,10 +15,11 @@ import MyContracts from './pages/MyContracts';
 import MyCourses from './pages/MyCourses';
 import EditCourse from './pages/EditCourse';
 import CreateContract from './pages/CreateContract';
-
 import { UserContextProvider } from './context/UserContext';
+import CreateCourse from './pages/CreateCourse';
 
 
+// Give buena nota (づ｡◕‿‿◕｡)づ
 const router = createBrowserRouter(
   createRoutesFromElements(
       <>
@@ -29,6 +30,7 @@ const router = createBrowserRouter(
           <Route path="myCourses/" element={<MyCourses/>}/>
           <Route path="profile/" element={<UserProfile/>}/>
           <Route path="createContract/" element={<CreateContract/>}/>
+          <Route path="createCourse/" element={<CreateCourse/>}/>
           <Route path="editCourse/" element={<EditCourse/>}/>
       </>
   )

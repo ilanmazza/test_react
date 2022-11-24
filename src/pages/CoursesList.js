@@ -1,6 +1,6 @@
 import React, {useEffect,useState} from 'react';
 import AppBar from "../components/appbar/AppBar";
-import CustomCard from '../components/courseCard/CourseCard';
+import { CourseCard } from '../components/courseCard/CourseCard';
 import Grid2 from '@mui/material/Unstable_Grid2';
 import {GetFilterCourses} from '../services/Courses'
 import TextField from '@mui/material/TextField';
@@ -60,7 +60,7 @@ export default function CoursesList () {
         </Grid2>
         <Grid2 container spacing={2} display="flex" justifyContent="center" alignItems="center">
         {topCourses.map(lessons => (
-          <CustomCard {...lessons} key={lessons.id}/>
+          <CourseCard {...lessons} key={lessons.id}/>
         ))}
       </Grid2>
       </Grid2>
