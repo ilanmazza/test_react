@@ -7,7 +7,7 @@ import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red,blue } from '@mui/material/colors';
+import { red } from '@mui/material/colors';
 import Rating from '@mui/material/Rating';
 import Grid from '@mui/material/Unstable_Grid2';
 import {SimpleDialog} from './LoginDialog'
@@ -15,14 +15,8 @@ import BuildIcon from '@mui/icons-material/Build';
 import {useNavigate} from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LoginIcon from '@mui/icons-material/Login';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-import PersonIcon from '@mui/icons-material/Person';
-import AddIcon from '@mui/icons-material/Add';
 import {useCourseDetails} from '../hooks/useCourse'
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
@@ -30,10 +24,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import DialogContent from '@mui/material/DialogContent';
-
-
-
-
+import Chip from '@mui/material/Chip';
 
 
 export function CourseCard(courseObject) {
@@ -194,12 +185,18 @@ function CourseDetailsDialog(props) {
         {courseDetails[0].teacher[0].name}
         </Typography>
         <Typography gutterBottom>
-        Calificaciones: {courseDetails[0].teacher[0].qualifications}
+        Titulos/Certificaciones: {courseDetails[0].teacher[0].titles}
+        </Typography>
+        <Typography gutterBottom>
+        Experiencia: {courseDetails[0].teacher[0].experience}
         </Typography>
       </DialogContent>
       <DialogContent dividers>
       <Typography variant="h6" gutterBottom>
-      Detalles del curso
+      {courseDetails[0].name}
+      </Typography>
+      <Typography gutterBottom>
+      Descripcion: {courseDetails[0].description}
       </Typography>
       <Typography gutterBottom>
       Costo: {courseDetails[0].cost}
@@ -207,6 +204,10 @@ function CourseDetailsDialog(props) {
       <Typography gutterBottom>
       Frecuencia: {courseDetails[0].periodicity}
       </Typography>
+      {courseDetails[0].type.map(type =>(
+        <Chip sx={[{ m: 0.1 }]} key={type} label={type} variant="outlined" />
+      ))
+    }
     </DialogContent>
     <DialogContent dividers>
       <Typography variant="h6" gutterBottom>

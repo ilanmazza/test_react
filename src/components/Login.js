@@ -7,6 +7,10 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import useUser from '../hooks/useUser.js';
 import LoginForm from './LoginForm.js';
 import Typography from '@mui/material/Typography';
+import { BrowserRouter as Router, Link as RouterLink } from "react-router-dom";
+
+
+
 
 
 const theme = createTheme();
@@ -52,7 +56,7 @@ export default function SignIn() {
               handleEmailChange={({ target }) => setEmail(target.value)}
               handlePasswordChange={({ target }) => setPassword(target.value)}
               handleSubmit={handleLogin} />
-              <Link href="signUp/" variant="body2" underline="hover">
+              <Link component={RouterLink} to="/signUp/" variant="body2" underline="hover">
                 ¿Todavia no tenes cuenta? Registrate
               </Link>
             </>

@@ -17,6 +17,7 @@ import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import AppBar from "../components/AppBar";
 
 
 
@@ -71,6 +72,7 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
+      <AppBar></AppBar>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box

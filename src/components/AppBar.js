@@ -78,6 +78,12 @@ export default function PrimaryAppBar() {
     setAnchorEl(null);
   };
 
+
+  // Seguro que hay una mejor manera de hacer esto
+  const handleHome = () => {
+    navigate('/')
+  }
+
   // Seguro que hay una mejor manera de hacer esto
   const handleProfile = () => {
     navigate('/profile')
@@ -140,7 +146,7 @@ export default function PrimaryAppBar() {
       <AppBar sx={{ bgcolor: "green" }} position="static">
         <Toolbar>
           <IconButton
-            href="/"
+            onClick={handleHome}
             size="large"
             edge="start"
             color="inherit"
@@ -150,7 +156,6 @@ export default function PrimaryAppBar() {
             <HomeIcon />
           </IconButton>
           <Typography
-            href="/"
             variant="h6"
             noWrap
             component="div"
