@@ -1,7 +1,7 @@
 import { useCallback, useContext, useState } from "react";
 import Context from "../context/UserContext";
 import loginService from '../services/Login';
-import createUserService from '../services/Users'
+import {createUserService, GetUserInfo, ChangeUserInfo} from '../services/Users'
 
 export default function useUser () {
     const {session, setSession} = useContext(Context)
@@ -61,5 +61,56 @@ export function useCreateUser () {
         hasCreateError: createState.error,
         hasCreated: createState.done,
         createUser
+    }
+}
+
+export function useUserInfo () {
+    const [userInfoState, setUserInfoState] = useState({loading: false, error: false, done: false})
+    const [userInfo, setUserInfo] = useState()
+
+    const getUserInfo = useCallback((token) => {
+        setUserInfoState({loading: true, error: false})
+        GetUserInfo(token)
+            .then(response => {
+                setUserInfoState({loading: false, error: false, done: true})
+                setUserInfo(response)
+                console.log(response)
+            })
+            .catch(err => {
+                setUserInfoState({loading: false, error: true, done: true})
+                console.error(err)
+            })
+    }, [])
+
+    return {
+        isUserInfoLoading: userInfoState.loading,
+        hasUserInfoError: userInfoState.error,
+        hasUserInfo: userInfoState.done,
+        userInfo,
+        getUserInfo
+    }
+}
+
+export function useChangeUserInfo () {
+    const [changeInfoState, setChangeInfo] = useState({loading: false, error: false, done: false})
+
+    const changeUserInfo = useCallback((data,token) => {
+        setChangeInfo({loading: true, error: false})
+        ChangeUserInfo(data,token)
+            .then(response => {
+                setChangeInfo({loading: false, error: false, done: true})
+                console.log(response)
+            })
+            .catch(err => {
+                setChangeInfo({loading: false, error: true, done: true})
+                console.error(err)
+            })
+    }, [])
+
+    return {
+        isChangingInfoLoading: changeInfoState.loading,
+        hasChangedInfoError: changeInfoState.error,
+        hasChangedInfo: changeInfoState.done,
+        changeUserInfo
     }
 }

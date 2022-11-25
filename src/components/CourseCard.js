@@ -121,7 +121,7 @@ export function CourseCard(courseObject) {
       />}
       <CardContent>
       {courseObject.type.map(type => (
-            <Typography key={type} variant="caption">{type} </Typography>
+            <Chip sx={[{ m: 0.1 }]} size="small" key={type} label={type} variant="outlined" />
         ))}
         <Typography variant="body2" color="text.secondary">
           {courseObject.description}

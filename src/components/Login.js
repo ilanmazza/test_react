@@ -7,7 +7,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import useUser from '../hooks/useUser.js';
 import LoginForm from './LoginForm.js';
 import Typography from '@mui/material/Typography';
-import { BrowserRouter as Router, Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 
 
