@@ -1,7 +1,7 @@
 import { useCallback, useContext, useState } from "react";
 import Context from "../context/UserContext";
 import loginService from '../services/Login';
-import {createUserService, GetUserInfo, ChangeUserInfo} from '../services/Users'
+import {createUserService, GetUserInfo, ChangeUserInfo, PasswordReset} from '../services/Users'
 
 export default function useUser () {
     const {session, setSession} = useContext(Context)
@@ -112,5 +112,29 @@ export function useChangeUserInfo () {
         hasChangedInfoError: changeInfoState.error,
         hasChangedInfo: changeInfoState.done,
         changeUserInfo
+    }
+}
+
+export function useResetPassword () {
+    const [changePasswordState, setChangePasswordState] = useState({loading: false, error: false, done: false})
+
+    const passwordReset = useCallback((data) => {
+        setChangePasswordState({loading: true, error: false})
+        PasswordReset(data)
+            .then(response => {
+                setChangePasswordState({loading: false, error: false, done: true})
+                console.log(response)
+            })
+            .catch(err => {
+                setChangePasswordState({loading: false, error: true, done: true})
+                console.error(err)
+            })
+    }, [])
+
+    return {
+        isPasswordResetingLoading: changePasswordState.loading,
+        hasPasswordResetError: changePasswordState.error,
+        hasPasswordReset: changePasswordState.done,
+        passwordReset
     }
 }

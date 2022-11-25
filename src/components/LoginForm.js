@@ -29,7 +29,7 @@ export default function LoginForm ({handleSubmit, ...props}) {
             type='password'
             value={props.password}
             name='Password'
-            placeholder='Password'
+            placeholder='Constraseña'
             autoComplete="current-password"
             onChange={props.handlePasswordChange}
           />

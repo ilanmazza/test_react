@@ -1,5 +1,7 @@
 const basicEndpoint = 'http://localhost:3001/api/users'
 const editEndpoint = 'http://localhost:3001/api/users/editUser'
+const passwordResetEndpoint = 'http://localhost:3001/api/users/resetPassword'
+
 
 export function createUserService (data) {
   return fetch(basicEndpoint, {
@@ -41,6 +43,21 @@ export function ChangeUserInfo (data,token) {
     body: JSON.stringify(data)
   }).then(res => {
     if (!res.ok) throw new Error (`${editEndpoint} endpoint response is NOT ok`)
+    return res.json()
+  }).then(res => {
+    return res
+  })
+}
+
+export function PasswordReset (data) {
+  return fetch(passwordResetEndpoint, {
+    method: 'PUT',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  }).then(res => {
+    if (!res.ok) throw new Error (`${passwordResetEndpoint} endpoint response is NOT ok`)
     return res.json()
   }).then(res => {
     return res

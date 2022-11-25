@@ -59,6 +59,9 @@ export default function SignIn() {
               <Link component={RouterLink} to="/signUp/" variant="body2" underline="hover">
                 ¿Todavia no tenes cuenta? Registrate
               </Link>
+              <Link component={RouterLink} to="/passwordReset/" variant="body2" underline="hover">
+                ¿Olvidates tu Constraseña? Restablecela
+              </Link>
             </>
           }
           {hasLoginError && <strong>Credenciales Erroneas</strong>}
