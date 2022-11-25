@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,7 +12,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LoginDialog from './LoginDialog';
-import {Form, useNavigate} from 'react-router-dom';
+import {Form, useLocation, useNavigate} from 'react-router-dom';
 import useUser from '../hooks/useUser.js';
 
 const Search = styled('div')(({ theme }) => ({
@@ -60,6 +60,7 @@ export default function PrimaryAppBar() {
   const navigate = useNavigate();
   const {isLogged, logout, session} = useUser()
   const [searchTerm,setSearchTerm] = useState('')
+  const location = useLocation();
 
 
   const handleLogout = () => {
@@ -163,6 +164,7 @@ export default function PrimaryAppBar() {
           >
             StudyTime
           </Typography>
+          {location.pathname !== '/coursesList' &&
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -170,11 +172,11 @@ export default function PrimaryAppBar() {
             <Form onSubmit={handleSearch}>
             <StyledInputBase
               onChange={handleSearchChange}
-              placeholder="Buscar cursos.."
+              placeholder="Explorar los cursos.."
               value={searchTerm}
             />
             </Form>
-          </Search>
+          </Search>}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
