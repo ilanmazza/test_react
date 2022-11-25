@@ -19,7 +19,7 @@ export function GetTopCourses () {
 
 export function GetFilterCourses (inName,inType) {
   return fetch(filterEndpoint+'?'+ new URLSearchParams({
-    orderBy: 'rating: -1',
+    order: "true",
     name: inName,
     type: inType,
     limit: 5})).then(res => {
