@@ -61,9 +61,9 @@ export function ContractCard(courseObject) {
 
   const [ratingValue, setRatingValue] = React.useState(courseObject.rating || 2.5);
   const [ratingHover, setRatingHover] = React.useState(-1);
-  const {isRatingLoading, hasRated, rateContract} = useRateContract()
+  const {isRatingLoading, rateContract} = useRateContract()
   const handleChangeRatingValue = () => {
-    if (!isRatingLoading && !hasRated ){
+    if (!isRatingLoading ){
       rateContract(courseObject.id,ratingHover,session.token)
       setRatingValue(ratingHover)
     }
