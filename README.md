@@ -1,5 +1,6 @@
-# Api StudyTime
-Esta api se construyo para ser utilizada con el siguiente [FrontEnd en React ](https://github.com/ilanmazza/test_react)
+# StudyTime
+Studytime es una plataforma para ponerse en contacto con profesores y profecionales que ofrecen cursos/clases
+Se requiere tener andando la api del proyecto: [Backend en Node con Express ](https://github.com/matiasba/StudyTimeAPI)
 
 # Deploy
 ### Metodo facil (Docker compose)
