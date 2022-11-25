@@ -1,7 +1,9 @@
-const basicEndpoint = 'http://localhost:3001/api/contracts'
-const ratingEndpoint = 'http://localhost:3001/api/contracts/applyRating'
-const commentEndpoint = 'http://localhost:3001/api/contracts/comment'
-const moderateCommentEndpoint = 'http://localhost:3001/api/contracts/moderateComment'
+import configData from "../config.json";
+
+const basicEndpoint = configData.API_URL+'/api/contracts'
+const ratingEndpoint = configData.API_URL+'/api/contracts/applyRating'
+const commentEndpoint = configData.API_URL+'/api/contracts/comment'
+const moderateCommentEndpoint = configData.API_URL+'/api/contracts/moderateComment'
 
 
 

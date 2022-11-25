@@ -1,7 +1,9 @@
-const filterEndpoint = 'http://localhost:3001/api/courses/filter'
-const fromTeacherEndpoint = 'http://localhost:3001/api/courses/fromTeacher'
-const basicEndpoint = 'http://localhost:3001/api/courses'
-const detailsEndpoint = 'http://localhost:3001/api/courses/details'
+import configData from "../config.json";
+
+const filterEndpoint = configData.API_URL+'/api/courses/filter'
+const fromTeacherEndpoint = configData.API_URL+'/api/courses/fromTeacher'
+const basicEndpoint = configData.API_URL+'/api/courses'
+const detailsEndpoint = configData.API_URL+'/api/courses/details'
 
 
 export function GetTopCourses () {

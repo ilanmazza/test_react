@@ -1,4 +1,6 @@
-const baseUrl = 'http://localhost:3001/api/login'
+import configData from "../config.json";
+
+const baseUrl = configData.API_URL+'/api/login'
 
 export default function loginService ({email,password}) {
   return fetch(baseUrl, {

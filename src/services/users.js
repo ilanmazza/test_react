@@ -1,6 +1,8 @@
-const basicEndpoint = 'http://localhost:3001/api/users'
-const editEndpoint = 'http://localhost:3001/api/users/editUser'
-const passwordResetEndpoint = 'http://localhost:3001/api/users/resetPassword'
+import configData from "../config.json";
+
+const basicEndpoint = configData.API_URL+'/api/users'
+const editEndpoint = configData.API_URL+'/api/users/editUser'
+const passwordResetEndpoint = configData.API_URL+'/api/users/resetPassword'
 
 
 export function createUserService (data) {
