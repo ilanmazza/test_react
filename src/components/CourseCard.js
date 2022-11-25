@@ -1,16 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useUser from '../hooks/useUser.js';
-import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { red,blue } from '@mui/material/colors';
 import Rating from '@mui/material/Rating';
 import Grid from '@mui/material/Unstable_Grid2';
 import {SimpleDialog} from './LoginDialog'
@@ -18,19 +15,24 @@ import BuildIcon from '@mui/icons-material/Build';
 import {useNavigate} from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LoginIcon from '@mui/icons-material/Login';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemText from '@mui/material/ListItemText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
+import PersonIcon from '@mui/icons-material/Person';
+import AddIcon from '@mui/icons-material/Add';
+import {useCourseDetails} from '../hooks/useCourse'
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+import InfoIcon from '@mui/icons-material/Info';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import DialogContent from '@mui/material/DialogContent';
 
 
 
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
 
 
 
@@ -39,11 +41,13 @@ export function CourseCard(courseObject) {
 
   const {isLogged, session} = useUser()
 
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  const [detailsOpen, setDetailsOpen] = React.useState(false);
+  const handleDetailsOpen = () => {
+    setDetailsOpen(true)
+  }
+  const handleDetailsClose = () => {
+    setDetailsOpen(false)
+  }
 
   const [open, setOpen] = React.useState(false);
   const handleClickOpenSession = () => {
@@ -135,22 +139,98 @@ export function CourseCard(courseObject) {
       <CardActions disableSpacing>
           <Rating name="half-rating-read" defaultValue={courseObject.rating[0]} precision={0.1} readOnly />
           <Typography >({courseObject.rating[1]})</Typography>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
+          <IconButton  onClick={handleDetailsOpen}>
+            <InfoIcon/>
+          </IconButton>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Costo: {courseObject.cost}</Typography>
-          <Typography paragraph>Frecuencia: {courseObject.periodicity}</Typography>
-        </CardContent>
-      </Collapse>
+      <CourseDetailsDialog
+        course={courseObject.id}
+        open={detailsOpen}
+        onClose={handleDetailsClose}
+      />
     </Card>
     </Grid>
+  );
+}
+
+
+
+
+function CourseDetailsDialog(props) {
+  const { onClose, course, open} = props;
+  const {isDetailsLoading, hasDetailsError, hasDetails, courseDetails, getCourseDetails} = useCourseDetails()
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+  const handleClose = () => {
+    onClose();
+  };
+
+
+  useEffect(() => {
+    if (open){
+      getCourseDetails(course)
+      console.log("buscar detalles para " + course)
+    }
+},[course, getCourseDetails, open])
+
+  return (
+    <Dialog onClose={handleClose} open={open} fullScreen={fullScreen}>
+      <DialogTitle>Detalles del curso</DialogTitle>
+      {isDetailsLoading &&
+      <DialogContent dividers>
+        <Box sx={[{ display: 'flex' },{ justifyContent: 'center' }]}>
+          <CircularProgress />
+        </Box>
+      </DialogContent>
+      }
+      {hasDetails && !hasDetailsError &&
+      <>
+      <DialogContent dividers>
+        <Typography variant="h6" gutterBottom>
+        Profesor
+        </Typography>
+        <Typography gutterBottom>
+        {courseDetails[0].teacher[0].name}
+        </Typography>
+        <Typography gutterBottom>
+        Calificaciones: {courseDetails[0].teacher[0].qualifications}
+        </Typography>
+      </DialogContent>
+      <DialogContent dividers>
+      <Typography variant="h6" gutterBottom>
+      Detalles del curso
+      </Typography>
+      <Typography gutterBottom>
+      Costo: {courseDetails[0].cost}
+      </Typography>
+      <Typography gutterBottom>
+      Frecuencia: {courseDetails[0].periodicity}
+      </Typography>
+    </DialogContent>
+    <DialogContent dividers>
+      <Typography variant="h6" gutterBottom>
+      Calificacion del curso
+      </Typography>
+      <Rating name="half-rating-read" defaultValue={courseDetails[0].rating[0]} precision={0.1} readOnly />
+      <Typography >Basado en {courseDetails[0].rating[1]} calificaciones</Typography>
+    </DialogContent>
+    {courseDetails[0].contracts[0] &&
+      <DialogContent dividers>
+      <Typography variant="h6" gutterBottom>
+      Comentarios ({courseDetails[0].contracts.length})
+      </Typography>
+      {courseDetails[0].contracts.map(contratos =>(
+          <Typography key={contratos._id} variant="h6" gutterBottom>
+          # {contratos.comment.comment}
+          </Typography>
+      ))
+
+      }
+    </DialogContent>
+    }
+    </>
+      }
+    </Dialog>
   );
 }

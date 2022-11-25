@@ -48,7 +48,7 @@ const [courseid] = useState(searchParams.get("courseid")|| '')
         <ContractCard {...currentContract} key={currentContract.id}/>
       }
       {!currentContract &&
-        <ContractCreator {...course} key={course.id}/>
+        <ContractCreator {...course} key={course.id} phone={session.phone} email={session.email}/>
       }
       </Grid2>
     </div>

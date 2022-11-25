@@ -52,12 +52,13 @@ export function useCreateCourse () {
 
 export function useCourseDetails () {
     const [detailsState, setDetailsState] = useState({loading: false, error: false, done: false})
-
+    const [courseDetails, setCourseDetails] = useState()
     const getCourseDetails = useCallback((data,token) => {
         setDetailsState({loading: true, error: false})
         GetCourseDetailsById(data)
             .then(response => {
                 setDetailsState({loading: false, error: false, done: true})
+                setCourseDetails(response)
                 console.log(response)
             })
             .catch(err => {
@@ -70,6 +71,7 @@ export function useCourseDetails () {
         isDetailsLoading: detailsState.loading,
         hasDetailsError: detailsState.error,
         hasDetails: detailsState.done,
+        courseDetails: courseDetails,
         getCourseDetails
     }
 }

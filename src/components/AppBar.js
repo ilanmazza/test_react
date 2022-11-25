@@ -11,7 +11,7 @@ import Menu from '@mui/material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import SimpleDialogDemo from './LoginDialog';
+import LoginDialog from './LoginDialog';
 import {Form, useNavigate} from 'react-router-dom';
 import useUser from '../hooks/useUser.js';
 
@@ -128,7 +128,7 @@ export default function PrimaryAppBar() {
       <MenuItem onClick={handleCourses}>Mis Cursos Dictados</MenuItem>
       }
       </div>
-      : <SimpleDialogDemo></SimpleDialogDemo> 
+      : <LoginDialog></LoginDialog> 
     }
 
     </Menu>

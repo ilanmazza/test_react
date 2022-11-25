@@ -13,6 +13,10 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import {useCreateUser} from '../hooks/useUser.js';
 import {useNavigate} from 'react-router-dom';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import dayjs from 'dayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 
 
@@ -22,7 +26,13 @@ export default function SignUp() {
   const navigate = useNavigate();
 
   const [rol, setRol] = useState('Student');
+  const [education, setEducation] = useState('Secundario');
+
   const {isCreateLoading, hasCreateError, hasCreated, createUser} = useCreateUser()
+  const [birthdate, setBirthdate] = React.useState(dayjs('2000-01-01T00:00:00'));
+  const handleBirthdateChange = (newValue) => {
+    setBirthdate(newValue);
+  };
 
   useEffect(() => {
     if (hasCreated && !hasCreateError){
@@ -39,6 +49,8 @@ export default function SignUp() {
         object[key] = value;
     });
     object['role'] = rol
+    object['education'] = education
+    object['birthdate'] = birthdate
 
     console.log(JSON.stringify(object));
     try {
@@ -49,8 +61,11 @@ export default function SignUp() {
     }
   }
 
-  const handleChange = (event) => {
+  const handleRolChange = (event) => {
     setRol(event.target.value);
+  }
+  const handleEducationChange = (event) => {
+    setEducation(event.target.value);
   }
 
 
@@ -99,6 +114,42 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
+                  id="phone"
+                  label="Telefono"
+                  name="phone"
+                  autoComplete="phone"
+                />
+              </Grid>
+              <Grid item xs={6}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <MobileDatePicker
+                label="Fecha de nacimiento"
+                inputFormat="DD/MM/YYYY"
+                value={birthdate}
+                onChange={handleBirthdateChange}
+                renderInput={(params) => <TextField {...params} />}
+              />
+              </LocalizationProvider>
+              </Grid>
+              <Grid item xs={6} >
+              <Select
+                required
+                fullWidth
+                label="Educacion"
+                id="education"
+                value={education}
+                onChange={handleEducationChange}
+              >
+              <MenuItem value={'Primario'}>Primario</MenuItem>
+              <MenuItem value={'Secundario'}>Secundario</MenuItem>
+              <MenuItem value={'Terciario'}>Terciario</MenuItem>
+              <MenuItem value={'Universitario'}>Universitario</MenuItem>
+              </Select>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
                   name="password"
                   label="Password"
                   type="password"
@@ -114,25 +165,38 @@ export default function SignUp() {
                 id="rol-select"
                 value={rol}
                 label="rol"
-                onChange={handleChange}
+                onChange={handleRolChange}
               >
               <MenuItem value={'Student'}>Alumno</MenuItem>
               <MenuItem value={'Teacher'}>Profesor</MenuItem>
               </Select>
               </Grid>
               {rol === 'Teacher' &&
+              <>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="qualifications"
-                  label="Calificaciones"
+                  name="titles"
+                  label="Titulos/Certificaciones"
                   type="text"
-                  id="qualifications"
-                  autoComplete="qualifications"
+                  id="titles"
+                  autoComplete="titles"
                 />
               </Grid>
-              }
+              <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                name="experience"
+                label="Experiencia"
+                type="text"
+                id="experience"
+                autoComplete="experience"
+              />
+              </Grid>
+              </>
+            }
             </Grid>
             {!isCreateLoading &&
             <Button

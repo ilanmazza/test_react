@@ -55,7 +55,7 @@ export function ContractCreator(courseObject) {
                                 fullWidth
                                 id="usercontactphone"
                                 label="Telefono de Contacto"
-                                defaultValue=''
+                                defaultValue={courseObject.phone}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -66,7 +66,7 @@ export function ContractCreator(courseObject) {
                                 fullWidth
                                 id="usercontactmail"
                                 label="Mail de contacto"
-                                defaultValue=''
+                                defaultValue={courseObject.email}
                             />
                         </Grid>
                         <Grid item xs={12}>
