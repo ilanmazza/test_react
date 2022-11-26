@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -25,6 +25,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { ControlCameraSharp } from '@mui/icons-material';
 
 const labels = {
   0.5: 'Inservible',
@@ -69,6 +70,14 @@ export function ContractCard(courseObject) {
     }
   }
 
+  const [blockerOpen, setBlockerOpen] = React.useState(false);
+  const handleBlockerOpen = () => {
+    setBlockerOpen(true)
+  }
+  const handleDetailsClose = () => {
+    setBlockerOpen(false)
+  }
+
   const [commentContentState, setCommentContentState] = React.useState((courseObject.comment && courseObject.comment.comment) || undefined)
   const [commentState, setCommentState] = React.useState((courseObject.comment && courseObject.comment.state) || undefined)
   const {isCommentLoading , commentContract} = useCommentContract()
@@ -80,12 +89,12 @@ export function ContractCard(courseObject) {
   }
   const handleCommentAccept = () => {
       setCommentState('Aceptado')
-      ModerateComment(courseObject.id,'Aceptado',session.token)
+      ModerateComment(session.token,courseObject.id,'Aceptado')
   }
 
-  const handleCommentBlock = () => {
+  const handleCommentBlock = (razon) => {
       setCommentState('Bloqueado')
-      ModerateComment(courseObject.id,'Bloqueado',session.token)
+      ModerateComment(session.token,courseObject.id,'Bloqueado',razon)
   }
 
   const [contractState, setContractState] = React.useState((courseObject.state))
@@ -215,7 +224,7 @@ export function ContractCard(courseObject) {
         {session.role === 'Teacher' && courseObject.comment &&  commentState === 'Pendiente' &&
         <>
             <Button type="submit" variant="contained" color="success" sx={{ mt: 3, mb: 2 }} onClick={handleCommentAccept}>Aceptar</Button>
-            <Button type="submit" variant="outlined" color="error" sx={{ mt: 3, mb: 2 }} onClick={handleCommentBlock}>Bloquear</Button>
+            <Button type="submit" variant="outlined" color="error" sx={{ mt: 3, mb: 2 }} onClick={handleBlockerOpen}>Bloquear</Button>
         </>
         }
         </CardContent>
@@ -265,7 +274,62 @@ export function ContractCard(courseObject) {
         }     
         </DialogActions>
       </Dialog>
+      <BlockDialog
+        razon={handleCommentBlock}
+        open={blockerOpen}
+        onClose={handleDetailsClose}
+
+      />
     </div>
     </Grid>
+  );
+}
+
+
+
+function BlockDialog(props) {
+  const { onClose, razon, open} = props;
+  const handleClose = () => {
+    onClose();
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);  
+    var object = {};
+    data.forEach(function(value, key){
+        object[key] = value;
+    });
+    razon(object.razon)
+    onClose();
+  }
+
+  return (
+    <Dialog onClose={handleClose} open={open}>
+      <DialogTitle>Razon del Bloqueo</DialogTitle>
+      <DialogContent dividers>
+      <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+        <div>
+          <TextField
+            autoComplete="given-razon"
+            name="razon"
+            required
+            fullWidth
+            id="razon"
+            label="Razon"
+            autoFocus
+          />
+        </div>
+        <Box textAlign='center' sx={{ m: 1 }}>
+          <Button type="submit" variant="contained" color="error">
+            Bloquear
+          </Button>
+          <Button variant="contained" onClick={handleClose}>
+            Cancelar
+          </Button>
+        </Box>
+      </Box>
+      </DialogContent>
+    </Dialog>
   );
 }

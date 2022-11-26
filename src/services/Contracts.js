@@ -60,7 +60,7 @@ export function CommentContract (contractid,comment,token) {
   })
 }
 
-export function ModerateComment (contractid,state,token) {
+export function ModerateComment (token,contractid,state,razon) {
   return fetch(moderateCommentEndpoint, {
     method: 'PUT',
     headers: {
@@ -69,7 +69,8 @@ export function ModerateComment (contractid,state,token) {
     },
     body: JSON.stringify({
       "contractid": contractid,
-      "state": state
+      "state": state,
+      "razon": razon
     })
   }).then(res => {
     if (!res.ok) throw new Error (`${moderateCommentEndpoint} endpoint response is NOT ok`)
